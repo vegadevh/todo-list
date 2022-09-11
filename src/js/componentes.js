@@ -34,5 +34,25 @@ input.addEventListener('keyup', (event) => {
         crearTodoHtml(nuevoTodo);
 
         input.value = '';
+        console.log({ todoList });
     }
-})
+});
+
+//Listado de los las tareas
+listado.addEventListener('click', (event) => {
+
+    const nombreElemento = event.target.localName;
+    const todoElemento = event.target.parentElement.parentElement;
+
+    const todoId = todoElemento.getAttribute('data-id'); //Se obtine el id
+
+    if (nombreElemento.includes('input')) {
+        todoList.toggleTodo(todoId);
+        todoElemento.classList.toggle('completed');
+    } else if (nombreElemento.includes('button')) {
+        todoList.deleteTodo(todoId);
+        listado.removeChild(todoElemento);
+    }
+
+    console.log({ todoList });
+});
