@@ -7,11 +7,16 @@ const btnEliminarCompletados = document.querySelector('.clear-completed');
 
 const contador = document.querySelector('strong');
 
+const filters = document.querySelector('.filters');
+const anchorFiltros = document.querySelectorAll('.filtro');
+
 export const taskCount = () => {
     let cuenta = 0;
-    for (let index = 0; index < listado.children.length; index++) {
-        if (listado.children[index].classList.value != "completed") {
-            cuenta++;
+
+    for (const todo of listado.children) {
+        console.log(todo);
+        if (!todo.classList.contains("completed")) {
+            cuenta++
         }
     }
     contador.innerText = cuenta;
@@ -85,4 +90,37 @@ btnEliminarCompletados.addEventListener('click', () => {
         }
     }
     taskCount();
+});
+
+
+filters.addEventListener('click', (event) => {
+
+    const elemento = event.target.text;
+    anchorFiltros.forEach(anchor => {
+        anchor.classList.remove('selected');
+    });
+
+    if (!elemento) {
+        return;
+    }
+
+    event.target.classList.add('selected');
+
+    //Elementos del listado HTML
+    for (const todo of listado.children) {
+        todo.classList.remove('hidden');
+
+        switch (elemento) {
+            case 'Pendientes':
+                if (todo.classList.contains('completed')) {
+                    todo.classList.add('hidden');
+                }
+                break;
+            case 'Completados':
+                if (!todo.classList.contains('completed')) {
+                    todo.classList.add('hidden');
+                }
+                break;
+        }
+    }
 });
