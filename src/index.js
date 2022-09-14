@@ -10,4 +10,3 @@ todoList.todos.forEach(todo => {
 });
 
 taskCount();
-console.log({ todoList });
