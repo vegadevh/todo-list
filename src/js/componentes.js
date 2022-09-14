@@ -14,13 +14,11 @@ export const taskCount = () => {
     let cuenta = 0;
 
     for (const todo of listado.children) {
-        console.log(todo);
         if (!todo.classList.contains("completed")) {
             cuenta++
         }
     }
     contador.innerText = cuenta;
-    console.log(`La cuenta es ${cuenta}`);
 }
 
 export const crearTodoHtml = (todo) => {
@@ -53,7 +51,6 @@ input.addEventListener('keyup', (event) => {
         crearTodoHtml(nuevoTodo);
 
         input.value = '';
-        console.log({ todoList });
         taskCount();
     }
 });
@@ -74,13 +71,11 @@ listado.addEventListener('click', (event) => {
         listado.removeChild(todoElemento);
     }
     taskCount();
-    console.log({ todoList });
 });
 
 btnEliminarCompletados.addEventListener('click', () => {
 
     todoList.deleteCompleted();
-    console.log({ todoList });
     let elementoActual;
 
     for (let index = listado.children.length - 1; index >= 0; index--) {
